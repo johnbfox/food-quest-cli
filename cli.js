@@ -1,38 +1,25 @@
 #!/usr/bin/env node
 const axios = require('axios')
-const moment = require('moment')
 const _ = require('lodash')
+const graphQlRequest = require('graphql-request')
+const graphQlClient = graphQlRequest.GraphQLClient
 
-const baseUrl = 'https://clients6.google.com/calendar/v3/calendars/0pa55cqrvtpcalggvn5mr0kpio@group.calendar.google.com/events'
+const baseUrl = 'https://api.yelp.com/v3/graphql'
+const tokenHeader = 'Bearer O2qVd2QYakazDZglmf4TCiiU71LbQeYQ3OdTq1oJAlNTn0lhLutN7XYUY9M6MAQaraWLvs8g6LxnqgSt1B1TIR_EW3-ZeMelQ7vNHzBoAPZKSYEx4N5XCPeZIEQMW3Yx'
+const client = new graphQlClient(baseUrl, { headers: {'Authorization': tokenHeader}})
 
-axios.get(baseUrl, {
-  params: {
-    calendarId: '0pa55cqrvtpcalggvn5mr0kpio@group.calendar.google.com',
-    singleEvents: true,
-    timeZone: 'America/New_York',
-    maxAttendees: 1,
-    maxResults: 250,
-    timeMin: moment().toISOString(),
-    timeMax: moment().add(4, 'days').toISOString(),
-    orderBy: 'startTime',
-    key: 'AIzaSyBNlYH01_9Hc5S1J9vuFmu2nUqBZJNAXxs'
-  }
-}).then((res) => {
-  const items = res.data.items
-  const byDay = _.groupBy(items, (item) => item.start.dateTime.split('T')[0])
+const query = `{
+    business(id: "garaje-san-francisco") {
+        name
+        id
+        alias
+        rating
+        url
+    }
+}`;
 
-  Object.keys(byDay).forEach((date) => {
-    const trucksOnDate = byDay[date]
-
-    const usefulDate = moment(date)
-    console.log(usefulDate.format('dddd, MMMM Do'))
-
-    trucksOnDate.forEach((truck) => {
-      console.log(`  ${truck.summary}`)
-    })
-
-    console.log('')
-  })
+client.request(query).then((res) => {
+  console.log(res);
 }).catch((err) => {
   console.error(err)
 })

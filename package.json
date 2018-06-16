@@ -1,21 +1,21 @@
 {
-  "name": "harvard-food-trucks-cli",
+  "name": "food-quest-cli",
   "version": "0.2.0",
-  "description": "check on Chicken & Rice Guys",
+  "description": "randomize yo lunch",
   "main": "cli.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/brandly/harvard-food-trucks-cli.git"
+    "url": "git+https://github.com/johnbfox/food-quest-cli.git"
   },
-  "author": "Matthew Brandly <brandly13@gmail.com> (http://brandly.me/)",
+  "author": "John Fox <jfox892@gmail.com> (http://brandly.me/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/brandly/harvard-food-trucks-cli/issues"
+    "url": "https://github.com/johnbfox/food-quest-cli/issues"
   },
-  "homepage": "https://github.com/brandly/harvard-food-trucks-cli#readme",
+  "homepage": "https://github.com/johnbfox/food-quest-cl#readme",
   "dependencies": {
     "axios": "0.14.0",
     "lodash": "4.16.2",
